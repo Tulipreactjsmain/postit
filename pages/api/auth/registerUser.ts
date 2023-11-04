@@ -1,36 +1,35 @@
 import User from "@/models/auth";
-import { NextApiRequest, NextApiResponse } from 'next';
-import nc from 'next-connect';
+import { NextApiRequest, NextApiResponse } from "next";
 import db from "@/utils/connectDb";
 
-const handler = nc<NextApiRequest, NextApiResponse>();
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Ensure the database is connected
+  // if (db.readyState !== 1) {
+  //   await db.connect();
+  // }
 
-handler.use(async (req, res, next) => {
-    if (db.readyState !== 1) {
-      db.once('open', () => next());
-    } else {
-      next();
-    }
-  });
-
-
-  handler.post(async (req, res) => {
-    console.log(req.body);
-    
+  if (req.method === "POST") {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, profileImg } = req.body;
       const user = new User({
         username,
         email,
         password,
+        profileImg,
       });
-  
+
       await user.save();
-  
-      res.status(201).json({ message: 'User registered successfully' });
+
+      res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-      res.status(500).json({ error: 'User registration failed' });
+      res.status(500).json({ error: "User registration failed" });
     }
-  });
-  
-  export default handler;
+  } else {
+    res.status(405).end(); // Method not allowed
+  }
+
+  // // Disconnect from the database
+  // if (db.readyState === 1) {
+  //   await db.disconnect();
+  // }
+}

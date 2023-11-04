@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
 
 let isConnected: boolean;
-const uri = process.env.MONGO_URI as string;
 
-export const db = mongoose.createConnection(uri, {
+// Define your database connection URI and options
+const uri = process.env.MONGO_URI as string;
+const options = {
   dbName: "postit",
-});
+};
+
+// Create the default Mongoose connection
+mongoose.connect(uri, options);
+
+const db = mongoose.connection;
 
 db.on("connected", () => {
   isConnected = true;
