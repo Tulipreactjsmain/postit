@@ -5,6 +5,7 @@ export interface UserInterface {
   email: string;
   password: string;
   profileImg: string;
+  createdAt: Date; 
 }
 const userSchema = new Schema<UserInterface & Document>(
   {

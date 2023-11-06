@@ -1,25 +1,26 @@
 import mongoose from "mongoose";
+const connectDb = async () => {
+  let isConnected: boolean;
 
-let isConnected: boolean;
+  const uri = process.env.MONGO_URI as string;
+  const options = {
+    dbName: "postit",
+  };
 
-// Define your database connection URI and options
-const uri = process.env.MONGO_URI as string;
-const options = {
-  dbName: "postit",
+  mongoose.connect(uri, options);
+
+  const db = mongoose.connection;
+
+  db.on("connected", () => {
+    isConnected = true;
+    console.log("MongoDB is connected");
+  });
+
+  db.on("error", (error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
 };
 
-// Create the default Mongoose connection
-mongoose.connect(uri, options);
+export default connectDb;
 
-const db = mongoose.connection;
-
-db.on("connected", () => {
-  isConnected = true;
-  console.log("MongoDB is connected");
-});
-
-db.on("error", (error) => {
-  console.error("Error connecting to MongoDB:", error);
-});
-
-export default db;
+// export default db;

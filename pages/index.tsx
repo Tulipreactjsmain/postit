@@ -8,25 +8,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export default function Home() {
-  // const video = {
-  //   title: "a",
-  //   play() {
-  //     console.log(this);
-  //   },
-  // };
-  // video.play();
-
-  class Video {
-    // title: string;
-  
-    constructor() {
+  const video = {
+    title: "a",
+    play() {
       console.log(this);
-       
-    }
-  }
-  
-  const myVideo = new Video();
-  // console.log(myVideo);
+    },
+  };
+  video.play();
+
   
   return (
     <>
