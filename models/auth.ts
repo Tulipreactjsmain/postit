@@ -26,12 +26,13 @@ const userSchema = new Schema<UserInterface & Document>(
     profileImg: {
       type: String,
     },
+
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model<UserInterface & Document>("user", userSchema);
+const User = mongoose.models.User || mongoose.model<UserInterface & Document>("user", userSchema);
 
 export default User;

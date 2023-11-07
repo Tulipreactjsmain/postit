@@ -9,7 +9,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const db = mongoose.connection;
-  console.log(db.readyState);
 
   if (req.method === "POST") {
     if (db.readyState !== 1) {
