@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/utils/connectDb";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
+import { setCookie } from "@/utils/session";
 
 export default async function handler(
   req: NextApiRequest,
@@ -42,6 +43,8 @@ export default async function handler(
         profileImg: newUser.profileImg,
         createdAt: newUser.createdAt,
       };
+      setCookie(res, "postit", user._id);
+      
 
       res.status(201).json({ user, msg: "User registration successful" });
     } catch (error) {
