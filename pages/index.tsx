@@ -2,21 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-
+import LoginForm, { LoginFormInputs } from "@/components/login";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export default function Home() {
-  const video = {
-    title: "a",
-    play() {
-      console.log(this);
-    },
+  const onSubmit = (data: LoginFormInputs) => {
+    const { email, password } = data;
+    axios.post("api/auth/login", { email, password });
+    console.log(data);
   };
-  video.play();
 
-  
   return (
     <>
       <Head>
@@ -119,6 +116,7 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <LoginForm onSubmit={onSubmit} />
       </main>
     </>
   );

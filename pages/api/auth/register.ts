@@ -43,7 +43,7 @@ export default async function handler(
         profileImg: newUser.profileImg,
         createdAt: newUser.createdAt,
       };
-      setCookie(res, "postit", user._id);
+      setCookie(res, "user", user._id);
       
 
       res.status(201).json({ user, msg: "User registration successful" });
