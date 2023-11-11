@@ -40,7 +40,12 @@ export default async function handler(
         profileImg: userExists.profileImg,
         createdAt: userExists.createdAt,
       };
-      setCookie(res, "user", user._id);
+      setCookie(res, "user", user._id, {
+        secure: true,
+        httpOnly: true,
+        path: '/',
+        maxAge: 30 * 24 * 60 * 60,
+      });
 
       res.status(200).json({ user, msg: "User login successful" });
     } catch (error) {
