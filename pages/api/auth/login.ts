@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/utils/connectDb";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
-import { setCookie } from "@/utils/session";
+import { setCookie, getCookie } from "@/utils/session";
 
 export default async function handler(
   req: NextApiRequest,
@@ -43,10 +43,10 @@ export default async function handler(
       setCookie(res, "user", user._id, {
         secure: true,
         httpOnly: true,
-        path: '/',
+        path: "/",
         maxAge: 30 * 24 * 60 * 60,
       });
-
+      
       res.status(200).json({ user, msg: "User login successful" });
     } catch (error) {
       res.status(500).json(error);

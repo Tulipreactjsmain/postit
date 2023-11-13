@@ -8,9 +8,9 @@ import axios from "axios";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const onSubmit = (data: LoginFormInputs) => {
+  const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
-    axios.post("api/auth/login", { email, password });
+    await axios.post("api/auth/login", { email, password });
     console.log(data);
   };
 
