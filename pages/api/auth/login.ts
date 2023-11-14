@@ -3,12 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/utils/connectDb";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
-import { setCookie, getCookie } from "@/utils/session";
+import { getCookie, setCookie, } from "@/utils/session";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  
   const db = mongoose.connection;
 
   if (req.method === "POST") {

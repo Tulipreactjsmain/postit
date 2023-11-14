@@ -1,36 +1,58 @@
-import React from 'react';
-import { createContext, useContext, ReactNode } from 'react';
+import React from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { createContext, useContext, ReactNode, useEffect } from "react";
 
 type MyContextType = {
-  username: string;
   setUser: (name: string) => void;
 };
-
-const MyContext = createContext<MyContextType | undefined>(undefined);
 
 type MyContextProviderProps = {
   children: ReactNode;
 };
 
-export const MyContextProvider: React.FC<MyContextProviderProps> = ({ children }) => {
-  const [username, setUsername] = React.useState<string>('');
-  
-  const setUser = (name: string) => {
-    setUsername(name);
+const MyContext = createContext<undefined>(undefined);
+
+export const MyContextProvider: React.FC<MyContextProviderProps> = ({
+  children,
+}) => {
+//   const [user, setUser] = React.useState<string>("");
+//   useEffect(() => {
+//     const getCookie = async () => {
+//       const userCookie = Cookies.get("user");
+
+//       console.log("ccook", userCookie);
+
+//       if (userCookie) {
+//         try {
+//           const response = await axios.get("api/hello");
+//           setUser(response.data);
+//           console.log(response);
+//         } catch (error) {
+//           console.error("Error fetching cookie:", error);
+//         }
+//       }
+//     };
+
+//     getCookie();
+//   }, []);
+
+  const contextValue: any = {
+    // setUser,
+    // user,
   };
 
-  const contextValue: MyContextType = {
-    username,
-    setUser,
-  };
-
-  return <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>;
+  return (
+    <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>
+  );
 };
 
 export const useMyContext = () => {
   const context = useContext(MyContext);
   if (!context) {
-    throw new Error('useMyContext must be used within a MyContextProvider');
+    throw new Error("useMyContext must be used within a MyContextProvider");
   }
   return context;
 };
+
+

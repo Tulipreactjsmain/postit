@@ -4,10 +4,14 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import LoginForm, { LoginFormInputs } from "@/components/login";
 import axios from "axios";
+import { parse } from 'cookie';
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ userCookie }: { userCookie: any }) {
+  console.log("userCookie", userCookie);
+
   const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
     await axios.post("api/auth/login", { email, password });
@@ -117,7 +121,29 @@ export default function Home() {
           </a>
         </div>
         <LoginForm onSubmit={onSubmit} />
+        <Link href="blogs">blogsssss</Link>
       </main>
     </>
   );
+}
+
+export async function getServerSideProps({ req }: any) {
+  try {
+    const cookies = parse(req.headers.cookie || '');
+  console.log('Parsed Cookies:', cookies);
+
+    return {
+      props: {
+        userCookie: cookies || "",
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+
+    return {
+      props: {
+        userCookie: "",
+      },
+    };
+  }
 }
