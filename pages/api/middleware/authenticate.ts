@@ -1,26 +1,29 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import jwt from 'jsonwebtoken';
 
 
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-
-const validateSession = (sessionToken: string): boolean => {
-  // Your session validation logic here
-  // Return true if the session is valid, false otherwise
-  return true; // Replace with your actual validation logic
-};
-
-const authenticate = (handler: NextApiHandler) => async (
+interface MyJwtPayload {
+    userId: string;
+  }
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-) => {
-  const sessionToken = req.cookies.myCookie || ''; 
-  const isValidSession = validateSession(sessionToken);
+) {
+  if (req.method === 'GET') {
+    const token = req.cookies.postit;
 
-  if (!isValidSession) {
-    res.writeHead(302, { Location: '/login' });
-    res.end();
-    return;
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized: Missing token' });
+    }
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as MyJwtPayload
+      const userId = decoded.userId 
+
+      res.status(200).json({ userId });
+    } catch (error) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+  } else {
+    res.status(405).end()
   }
-  return handler(req, res);
-};
-
-export default authenticate;
+}

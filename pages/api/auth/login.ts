@@ -3,13 +3,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/utils/connectDb";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
-import { getCookie, setCookie, } from "@/utils/session";
+import jwt from "jsonwebtoken";
+import { setCookie } from "@/utils/session";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  
   const db = mongoose.connection;
 
   if (req.method === "POST") {
@@ -34,6 +34,20 @@ export default async function handler(
         });
       }
 
+      const token = jwt.sign(
+        { userId: userExists._id },
+        process.env.JWT_SECRET as string,
+        {
+          expiresIn: "30d",
+        }
+      );
+      setCookie(res, "postit", token, {
+        secure: true,
+        httpOnly: true,
+        path: "/",
+        maxAge: 30 * 24 * 60 * 60,
+      });
+
       const user = {
         _id: userExists._id,
         username: userExists.username,
@@ -41,13 +55,7 @@ export default async function handler(
         profileImg: userExists.profileImg,
         createdAt: userExists.createdAt,
       };
-      setCookie(res, "user", user._id, {
-        secure: true,
-        httpOnly: true,
-        path: "/",
-        maxAge: 30 * 24 * 60 * 60,
-      });
-      
+
       res.status(200).json({ user, msg: "User login successful" });
     } catch (error) {
       res.status(500).json(error);
