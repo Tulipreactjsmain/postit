@@ -6,12 +6,13 @@ import { parse } from "cookie";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({ userCookie }: { userCookie: any }) {
+export default function Home({ userData }: { userData: any }) {
+  console.log(userData);
+  
   const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
     await axios.post("api/auth/login", { email, password });
-    console.log(data);
+    location.reload();
   };
 
   return (
@@ -25,7 +26,8 @@ export default function Home({ userCookie }: { userCookie: any }) {
       <main>
         <LoginForm onSubmit={onSubmit} />
         <Link href="blogs">blogsssss</Link>
-        {userCookie}
+        {userData.userId}
+        {userData.email}
       </main>
     </>
   );
@@ -41,11 +43,10 @@ export async function getServerSideProps({ req }: any) {
       },
     });
     const data = await response.json();
-    console.log(data);
-    
+
     return {
       props: {
-        userCookie: data.userId || "",
+        userData: data || "",
       },
     };
   } catch (error) {

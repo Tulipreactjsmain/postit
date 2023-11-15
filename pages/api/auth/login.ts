@@ -35,7 +35,13 @@ export default async function handler(
       }
 
       const token = jwt.sign(
-        { userId: userExists._id },
+        {
+          userId: userExists._id,
+          username: userExists.username,
+          email: userExists.email,
+          profileImg: userExists.profileImg,
+          createdAt: userExists.createdAt,
+        },
         process.env.JWT_SECRET as string,
         {
           expiresIn: "30d",
@@ -48,15 +54,7 @@ export default async function handler(
         maxAge: 30 * 24 * 60 * 60,
       });
 
-      const user = {
-        _id: userExists._id,
-        username: userExists.username,
-        email: userExists.email,
-        profileImg: userExists.profileImg,
-        createdAt: userExists.createdAt,
-      };
-
-      res.status(200).json({ user, msg: "User login successful" });
+      res.status(200).json({ msg: "User login successful" });
     } catch (error) {
       res.status(500).json(error);
     }

@@ -1,12 +1,12 @@
-import { getCookie } from "@/utils/session";
 import nextCookies from 'next-cookies';
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req);
+  
   if (req.method === "GET") {
-    const cookies = nextCookies({ req });
-    const userCookie = cookies;
-    console.log("whaa", userCookie);
+    const userCookie = nextCookies({ req });
+    console.log("usercook", userCookie);
     
     if (userCookie) {
       res.status(200).json({ userCookie });

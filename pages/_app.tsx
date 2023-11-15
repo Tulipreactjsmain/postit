@@ -5,7 +5,7 @@ import { MyContextProvider } from "@/utils/store";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <MyContextProvider>
+      <MyContextProvider {...pageProps}>
         <Component {...pageProps} />
       </MyContextProvider>
     </>
