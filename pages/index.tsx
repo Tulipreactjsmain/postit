@@ -4,14 +4,19 @@ import LoginForm, { LoginFormInputs } from "@/components/login";
 import axios from "axios";
 import { parse } from "cookie";
 import Link from "next/link";
+import { useMyContext } from "@/utils/store";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home({ userData }: { userData: any }) {
+  const { setUser, user } = useMyContext();
   console.log(userData);
+  console.log("userrrr" , user);
   
+
   const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
     await axios.post("api/auth/login", { email, password });
+    setUser(userData);
     location.reload();
   };
 

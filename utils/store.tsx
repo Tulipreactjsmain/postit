@@ -5,37 +5,24 @@ type MyContextProviderProps = {
   children: ReactNode;
 };
 
-const MyContext = createContext<undefined>(undefined);
+type MyContextType = {
+  setUser: (user: object) => void;
+  user: object | null;
+};
+
+const MyContext = createContext<MyContextType>({
+  setUser: () => {},
+  user: null,
+});
 
 export const MyContextProvider: React.FC<MyContextProviderProps> = ({
   children,
 }) => {
-  const [user, setUser] = React.useState<string>("");
-  const [loginLoader, setLoginLoader] = React.useState<boolean>(false);
+  const [user, setUser] = React.useState<object | null>(null);
 
-  // useEffect(() => {
-  //   const getCookie = async () => {
-  //     const userCookie = Cookies.get("user");
-
-  //     console.log("ccook", userCookie);
-
-  //     if (userCookie) {
-  //       try {
-  //         const response = await axios.get("api/hello");
-  //         setUser(response.data);
-  //         console.log(response);
-  //       } catch (error) {
-  //         console.error("Error fetching cookie:", error);
-  //       }
-  //     }
-  //   };
-
-  //   getCookie();
-  // }, []);
-
-  const contextValue: any = {
-    // setUser,
-    // user,
+  const contextValue: MyContextType = {
+    setUser,
+    user,
   };
 
   return (
