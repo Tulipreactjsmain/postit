@@ -1,23 +1,27 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import LoginForm, { LoginFormInputs } from "@/components/login";
-import axios from "axios";
-import { parse } from "cookie";
 import Link from "next/link";
-import { useMyContext } from "@/utils/store";
+import { signIn, signOut } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
-export default function Home({ userData }: { userData: any }) {
-  const { setUser, user } = useMyContext();
-  console.log(userData);
-  console.log("userrrr" , user);
+export default function Home() {
+  const { data: Session } = useSession();
+  console.log(Session);
   
-
   const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
-    await axios.post("api/auth/login", { email, password });
-    setUser(userData);
-    location.reload();
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      console.log("resss", res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -30,31 +34,9 @@ export default function Home({ userData }: { userData: any }) {
       </Head>
       <main>
         <LoginForm onSubmit={onSubmit} />
-        <Link href="blogs">blogsssss</Link>
-        {userData.userId}
-        {userData.email}
+        <Link href="blogs">blogsssss</Link> <br />
+        <button onClick={() => signOut()}>LOG OUT</button>
       </main>
     </>
   );
-}
-
-export async function getServerSideProps({ req }: any) {
-  try {
-    const cookies = parse(req.headers.cookie || "");
-    const apiUrl = process.env.NEXT_PUBLIC_API_DOMAIN;
-    const response = await fetch(`${apiUrl}/api/middleware/authenticate`, {
-      headers: {
-        Cookie: `postit=${cookies.postit || ""}`,
-      },
-    });
-    const data = await response.json();
-
-    return {
-      props: {
-        userData: data || "",
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
 }
