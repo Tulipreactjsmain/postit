@@ -5,6 +5,14 @@ import connectDb from "@/utils/connectDb";
 import User from "@/models/auth";
 import bcrypt from "bcrypt";
 
+interface CustomUser {
+  id: string;
+  username: string;
+  email: string;
+  profileImg: string;
+  createdAt: Date;
+}
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -18,8 +26,6 @@ export default NextAuth({
           connectDb();
         }
         const userExists = await User.findOne({ email: credentials?.email });
-        console.log("userexists", userExists);
-
         if (!userExists) {
           throw new Error("User with the provided email not found.");
         }
@@ -30,7 +36,7 @@ export default NextAuth({
         if (!passwordMatch) {
           throw new Error("Incorrect password. Please try again.");
         }
-        const user = {
+        const user: CustomUser = {
           id: userExists._id,
           username: userExists.username,
           email: userExists.email,
@@ -46,6 +52,22 @@ export default NextAuth({
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/", 
+    signIn: "/",
+  },
+  callbacks: {
+    async jwt({ token, account, profile }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = profile?.id
+      }
+      return token;
+    },
+    // async session({ session, token, user }) {
+    //   if (session.user) {
+    //     session.user.name = user.username;
+    //     session.user.image = user.profileImg;
+    //   }
+    //   return session;
+    // },
   },
 });
