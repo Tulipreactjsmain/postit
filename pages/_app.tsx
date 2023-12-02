@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import Navbar from "@/components/Navbar";
 
 export default function App({
   Component,
@@ -14,6 +15,7 @@ export default function App({
     <>
       <SessionProvider session={pageProps.session}>
         <ChakraProvider>
+          <Navbar />
           <Component {...pageProps} />
         </ChakraProvider>
       </SessionProvider>

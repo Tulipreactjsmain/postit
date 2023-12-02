@@ -4,13 +4,13 @@ import { Inter } from "next/font/google";
 import LoginForm, { LoginFormInputs } from "@/components/login";
 import Link from "next/link";
 import { signIn, signOut } from "next-auth/react";
-import Navbar from "@/components/Navbar";
+import { Button, Container } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const { data: Session } = useSession();
   console.log(Session);
-  
+
   const onSubmit = async (data: LoginFormInputs) => {
     const { email, password } = data;
     try {
@@ -33,12 +33,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar/>
-      <main>
+
+      <Container px={`5vw`} pt="2vw" maxW="100%">
         <LoginForm onSubmit={onSubmit} />
         <Link href="blogs">blogsssss</Link> <br />
-        <button onClick={() => signOut()}>LOG OUT</button>
-      </main>
+        <Button onClick={() => signOut()}>LOG OUT</Button>
+      </Container>
     </>
   );
 }
