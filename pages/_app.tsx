@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Session } from "next-auth";
-import { MyContextProvider } from "@/utils/store";
 import { SessionProvider } from "next-auth/react";
 
 export default function App({
@@ -12,11 +12,11 @@ export default function App({
 }>) {
   return (
     <>
-      <MyContextProvider {...pageProps}>
-        <SessionProvider session={pageProps.session}>
+      <SessionProvider session={pageProps.session}>
+        <ChakraProvider>
           <Component {...pageProps} />
-        </SessionProvider>
-      </MyContextProvider>
+        </ChakraProvider>
+      </SessionProvider>
     </>
   );
 }

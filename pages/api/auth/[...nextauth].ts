@@ -55,19 +55,27 @@ export default NextAuth({
     signIn: "/",
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account }) {
       if (account) {
-        token.accessToken = account.access_token;
-        token.id = profile?.id
+        const user = await User.findById(account.providerAccountId.toString());
+        if (user) {
+          token.id = user._id.toString();
+          token.name = user.username;
+          token.picture = user.profileImg;
+          token.createdAt = user.createdAt;
+        }
       }
       return token;
     },
-    // async session({ session, token, user }) {
-    //   if (session.user) {
-    //     session.user.name = user.username;
-    //     session.user.image = user.profileImg;
-    //   }
-    //   return session;
-    // },
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          ...session.user,
+          id: token.id,
+          createdAt: token.createdAt,
+        } as CustomUser;
+      }
+      return session;
+    },
   },
 });
