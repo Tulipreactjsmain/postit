@@ -1,12 +1,11 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import LoginForm, { LoginFormInputs } from "@/components/login";
 import Link from "next/link";
 import { signIn, signOut } from "next-auth/react";
 import { Button, Container } from "@chakra-ui/react";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Harmattan({ subsets: ["latin"], weight: "400" });
 export default function Home() {
   const { data: Session } = useSession();
   console.log(Session);

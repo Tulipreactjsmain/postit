@@ -1,5 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import '@fontsource/harmattan/400.css'
+import '@fontsource/harmattan/700.css';
+import theme from "@/utils/chakraTheme";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -14,7 +17,7 @@ export default function App({
   return (
     <>
       <SessionProvider session={pageProps.session}>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <Navbar />
           <Component {...pageProps} />
         </ChakraProvider>
