@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import Image from "next/image";
+import { CiMenuBurger } from "react-icons/ci";
 import { Flex, Spacer, Box, Button, ButtonGroup } from "@chakra-ui/react";
+import Link from "next/link";
 const Navbar: FC = () => {
   return (
     <Flex
@@ -8,33 +10,45 @@ const Navbar: FC = () => {
       alignItems="center"
       px="5vw"
       gap="2"
-      h={`92px`}
+      h={`11.2vh`}
     >
-      <Box>
+      <Link href={`/`}>
         <Image src={`/logo.svg`} alt="logo" width={100} height={24} priority />
-      </Box>
+      </Link>
       <Spacer />
       <ButtonGroup
         gap="5"
         alignItems="center"
         display={{ base: "none", lg: "flex", md: "flex" }}
       >
-        <Button variant={`unstyled`} fontWeight={`400`}>
+        <Link
+          href={`/stories`}
+          as="button"
+          style={{
+            fontWeight: `400`,
+            fontSize: `24px`,
+          }}
+        >
           Stories
-        </Button>
-        <Button variant={`unstyled`} fontWeight={`400`}>
+        </Link>
+        <Box as="button" fontWeight={`400`} fontSize={`2xl`}>
           Contact
-        </Button>
-        <Button variant={`unstyled`} fontWeight={`400`}>
+        </Box>
+        <Box as="button" fontWeight={`400`} fontSize={`2xl`}>
           Sign Up
-        </Button>
+        </Box>
         <Button
           color={`white`}
           style={{ backgroundColor: "#0086B0", fontWeight: "400" }}
+          fontSize={`2xl`}
+          h={`33px`}
         >
           Get Started
         </Button>
       </ButtonGroup>
+      <Box display={{ base: "block", lg: "none", md: "none" }}>
+        <CiMenuBurger style={{ fontSize: "2rem" }} />
+      </Box>
     </Flex>
   );
 };
