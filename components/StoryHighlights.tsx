@@ -11,17 +11,19 @@ export default function StoryHighlights() {
       display={`flex`}
       alignItems={`center`}
       justifyContent={`center`}
+      backgroundColor={`#ECEAEB`}
     >
-      <Box py={`8.34vh`} w={`83.28vw`}>
+      <Box py={`8.34vh`} w={{ base: "100%", md: "100%", lg: "83.28vw" }}>
         <Flex
           minH="145px"
           w={"100%"}
           gap={`27px`}
-          px={`27px`}
+          px={{ base: "10px", md: "10px", lg: `27px` }}
           border={`solid 0.5px #BBBBBB`}
           rounded={`md`}
-          justifyContent={`center`}
-          // flexWrap={`wrap`}
+          justifyContent={{ base: "space-between", md: "space-between", lg: "center" }}
+          // justifyContent={`space-between`}
+          flexWrap={{ base: "wrap", lg: "nowrap" }}
         >
           {highlightData.map((data, index) => (
             <Box
@@ -30,7 +32,6 @@ export default function StoryHighlights() {
               alignItems={`center`}
               gap={`5`}
               w={`381px`}
-              
             >
               <Box
                 minW={`146px`}

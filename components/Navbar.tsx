@@ -11,6 +11,7 @@ const Navbar: FC = () => {
       px="5vw"
       gap="2"
       h={`11.2vh`}
+      
     >
       <Link href={`/`}>
         <Image src={`/logo.svg`} alt="logo" width={100} height={24} priority />

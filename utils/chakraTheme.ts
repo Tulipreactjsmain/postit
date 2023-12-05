@@ -13,8 +13,9 @@ interface CustomThemeConfig extends ThemeConfig {
 const theme: CustomThemeConfig = extendTheme({
   styles: {
     global: {
-      Html: {
+      "Html, body": {
         fontSize: "16px",
+        background: "#F1EFF0",
       },
     },
   },
@@ -29,7 +30,7 @@ const theme: CustomThemeConfig = extendTheme({
     lg: "18px",
     xl: "20px",
     "2xl": "24px",
-    "7xl": "6.875rem"
+    "7xl": "6.875rem",
   },
 });
 
