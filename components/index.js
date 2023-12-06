@@ -1,3 +1,4 @@
 import Navbar from "./Navbar";
-export { Navbar };
+import LoginModal from "./LoginModal";
+export { Navbar, LoginModal };
 export { default as StoryHighlights } from "./StoryHighlights";
