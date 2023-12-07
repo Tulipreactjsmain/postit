@@ -48,21 +48,44 @@ const Navbar: FC = () => {
           >
             Stories
           </Link>
-          <Box as="button" fontWeight={`400`} fontSize={`2xl`}>
+          <Box
+            as="button"
+            fontWeight={`400`}
+            _hover={{
+              color: "#937869",
+            }}
+            fontSize={`2xl`}
+          >
             Contact
           </Box>
-          <Box as="button" fontWeight={`400`} fontSize={`2xl`} onClick={onOpen}>
-            Sign Up
-          </Box>
-          <Button
-            color={`white`}
-            style={{ backgroundColor: "#0086B0", fontWeight: "400" }}
+          <Box
+            as="button"
+            fontWeight={`400`}
             fontSize={`2xl`}
-            h={`33px`}
+            _hover={{
+              color: "#937869",
+            }}
             onClick={onOpen}
           >
-            Get Started
-          </Button>
+            Sign Up
+          </Box>
+          <button
+            color={`white`}
+            className="bn632-hover bn19"
+            style={{
+              // background:
+              //   "linear-gradient(90deg, rgba(255,187,153,1) 0%, rgba(213,102,41,1) 64%, rgba(197,87,27,1) 100%)",
+              fontWeight: "400",
+            }}
+            // fontSize={`2xl`}
+            // h={`33px`}
+            onClick={onOpen}
+            // _hover={{
+            //   backgroundColor: "#000000",
+            // }}
+          >
+            <span className="bn54span">Get Started</span>
+          </button>
         </ButtonGroup>
         <Box display={{ base: "block", lg: "none", md: "none" }}>
           <CiMenuBurger style={{ fontSize: "2rem" }} />

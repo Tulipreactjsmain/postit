@@ -50,7 +50,7 @@ export default function StoryHighlights() {
               <Box display={`flex`} flexDirection={`column`} gap={`5`}>
                 <Text
                   rounded={`md`}
-                  backgroundColor={`#E5BF5E`}
+                  backgroundColor={`#F6C74E`}
                   maxW={`89px`}
                   color={`white`}
                   textAlign={`center`}

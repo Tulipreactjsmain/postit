@@ -32,6 +32,12 @@ const theme: CustomThemeConfig = extendTheme({
     "2xl": "24px",
     "7xl": "6.875rem",
   },
+  colors: {
+    brand: {
+      100: "#E57C42",
+      900: "#1a202c",
+    },
+  },
 });
 
 export default theme;
