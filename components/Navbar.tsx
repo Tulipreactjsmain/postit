@@ -11,7 +11,9 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { LoginModal } from ".";
+import { Shizuru } from "next/font/google";
 
+const Rubik = Shizuru({ weight: "400", subsets: ["latin"] });
 const Navbar: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -24,7 +26,11 @@ const Navbar: FC = () => {
         gap="2"
         h={`11.2vh`}
       >
-        <Link href={`/`}>
+        <Link
+          href={`/`}
+          style={{ maxWidth: "98px", fontSize: "36px" }}
+          className={`${Rubik.className}`}
+        >
           <Image
             src={`/logo.svg`}
             alt="logo"
@@ -32,6 +38,7 @@ const Navbar: FC = () => {
             height={24}
             priority
           />
+          {/* Post<span style={{ color: "#c5571b" }}>it</span> */}
         </Link>
         <Spacer />
         <ButtonGroup
@@ -71,18 +78,15 @@ const Navbar: FC = () => {
           </Box>
           <button
             color={`white`}
-            className="bn632-hover bn19"
+            className="getStarted-button bn19"
             style={{
-              // background:
-              //   "linear-gradient(90deg, rgba(255,187,153,1) 0%, rgba(213,102,41,1) 64%, rgba(197,87,27,1) 100%)",
+  
               fontWeight: "400",
             }}
             // fontSize={`2xl`}
             // h={`33px`}
             onClick={onOpen}
-            // _hover={{
-            //   backgroundColor: "#000000",
-            // }}
+
           >
             <span className="bn54span">Get Started</span>
           </button>

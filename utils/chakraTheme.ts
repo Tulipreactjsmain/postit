@@ -1,4 +1,3 @@
-import { Html } from "next/document";
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 interface CustomThemeFonts {

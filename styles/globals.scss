@@ -1,8 +1,13 @@
-.bn632-hover {
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap");
+
+.logo {
+  width: 100% !important;
+}
+.getStarted-button {
   position: relative;
-  height: 33px;
-  width: 132px;
-  max-width: 132px;
+  height: 40px;
+  width: 140px;
+  max-width: 140px !important;
   font-size: 24px;
   font-weight: 600;
   color: #fff;
@@ -10,14 +15,14 @@
   text-align: center;
   border: none;
   background-size: 300% 100%;
-  border-radius: 8px;
+  border-radius: 5px;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
 
-.bn632-hover.bn19 {
+.getStarted-button.bn19 {
   background-image: linear-gradient(
     to right,
     #ecbfa5,
@@ -27,7 +32,7 @@
   );
 }
 
-.bn632-hover:hover {
+.getStarted-button:hover {
   background-position: 100% 0 !important;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -36,16 +41,24 @@
   animation: bn54rotate 0.7s ease-in-out both;
 }
 
-.bn632-hover:hover .bn54span {
+.getStarted-button:hover .bn54span {
   letter-spacing: 0.7px;
   animation: bn54storm 0.7s ease-in-out both;
   animation-delay: 0.06s;
 }
 
-.bn632-hover:focus {
+.getStarted-button:focus {
   outline: none;
 }
 
+.Hero-h1 {
+    background: rgb(237,183,155);
+    background: linear-gradient(90deg, rgba(237,183,155,1) 0%, rgba(198,111,62,1) 46%, rgba(198,80,17,1) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+}
 @keyframes bn54rotate {
   0% {
     transform: rotate(0deg) translate3d(0, 0, 0);

@@ -1,9 +1,21 @@
 import { Box, Text, Flex } from "@chakra-ui/react";
 export default function StoryHighlights() {
   const highlightData = [
-    { img: "/LifestyleImg.svg" },
-    { img: "/NatureImg.svg" },
-    { img: "/TechnologyImg.svg" },
+    {
+      img: "/LifestyleImg.svg",
+      field: "Lifestyle",
+      description: "The 20 Biggest Fashion Companies In Nigeria 2022",
+    },
+    {
+      img: "/NatureImg.svg",
+      field: "Nature",
+      description: "The 20 Biggest Agro Companies In Nigeria 2022",
+    },
+    {
+      img: "/TechnologyImg.svg",
+      field: "Technology",
+      description: "The 20 Biggest Fintech Companies In Nigeria 2022",
+    },
   ];
   return (
     <Box
@@ -30,7 +42,7 @@ export default function StoryHighlights() {
           flexWrap={{ base: "wrap", lg: "nowrap" }}
         >
           {highlightData.map((data, index) => (
-            <Box key={index} display={`flex`} gap={`5`} maxW={`381px`}>
+            <Box key={index} display={`flex`} gap={`5`} maxW={`381px`} >
               <Box
                 position={`relative`}
                 w={`100%`}
@@ -56,10 +68,10 @@ export default function StoryHighlights() {
                   textAlign={`center`}
                   mt={`4`}
                 >
-                  Lifestyle
+                 {data.field}
                 </Text>
                 <Text fontSize={"lg"}>
-                  The 20 Biggest Fashion Companies In Nigeria 2022
+                  {data.description}
                 </Text>
               </Box>
             </Box>

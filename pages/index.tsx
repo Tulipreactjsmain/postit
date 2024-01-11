@@ -26,7 +26,7 @@ export default function Home() {
         >
           <VStack alignItems={`start`} maxW={`542px`}>
             <Heading as="h1" size="4xl" noOfLines={1} p={0} m={0}>
-              Stay Curious.
+              Stay Curio<span className="Hero-h1" style={{ color: "#c5571b" }}>us</span>.
             </Heading>
             <Text fontSize={`2xl`} noOfLines={3}>
               Lorem ipsum dolor sit ameetur adipiscing elit. Coctetur egestas
